@@ -16,5 +16,8 @@ namespace BlogApp.DAL.Repositories.Interfaces
             bool IsDescending = false,
             params string[] includes);
         DbSet<TEntity> Table { get; }
+
+        Task Create(TEntity entity);
+        Task<int> SaveChangesAsync();
     }
 }

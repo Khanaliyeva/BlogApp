@@ -1,4 +1,5 @@
-﻿using BlogApp.Core.Entities;
+﻿using BlogApp.Business.DTOs.BrandDtos;
+using BlogApp.Core.Entities;
 using BlogApp.DAL.Context;
 using BlogApp.DAL.Repositories.Interfaces;
 using System;
@@ -12,6 +13,7 @@ namespace BlogApp.Business.Services.Interfaces
     public interface IBrandService
     {
         Task<ICollection<Brand>> GetAllAsync();
+        Task<bool> CreateBrandAsync(CreateBrandDto brandDto);
       
     }
 }

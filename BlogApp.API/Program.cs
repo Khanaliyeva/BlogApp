@@ -1,8 +1,10 @@
+using BlogApp.Business.DTOs.BrandDtos;
 using BlogApp.Business.Services.Implimentations;
 using BlogApp.Business.Services.Interfaces;
 using BlogApp.DAL.Context;
 using BlogApp.DAL.Repositories.Implimentations;
 using BlogApp.DAL.Repositories.Interfaces;
+using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,7 +12,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddScoped<IBrandRepository, BrandRepository>();
 builder.Services.AddScoped<IBrandService, BrandService>();
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddFluentValidation(opt =>
+{
+    opt.RegisterValidatorsFromAssembly(typeof(BrandCreateDtoValidation).Assembly);
+});
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

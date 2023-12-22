@@ -21,6 +21,8 @@ namespace BlogApp.DAL.Repositories.Implimentations
         }
         public DbSet<TEntity> Table =>_context.Set<TEntity>();
 
+        
+
         public async Task<IQueryable<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>>? expression = null,
             Expression<Func<TEntity, object>>? oredrByExpression = null, 
             bool IsDescending = false, 
@@ -44,6 +46,16 @@ namespace BlogApp.DAL.Repositories.Implimentations
                 query = query.Where(expression);
             }
             return query;
+        }
+
+        public async Task Create(TEntity entity)
+        {
+            await Table.AddAsync(entity);
+        }
+
+        public async Task<int> SaveChangesAsync()
+        {
+            return await _context.SaveChangesAsync();
         }
     }
 }

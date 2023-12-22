@@ -1,4 +1,5 @@
-﻿using BlogApp.Business.Services.Interfaces;
+﻿using BlogApp.Business.DTOs.BrandDtos;
+using BlogApp.Business.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,6 +20,14 @@ namespace BlogApp.API.Controllers
         {
             var brands = await _service.GetAllAsync();
             return StatusCode(StatusCodes.Status200OK,brands);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create([FromForm] CreateBrandDto brandDto)
+        {
+            bool result=await _service.CreateBrandAsync(brandDto);
+            if (result) { return StatusCode(StatusCodes.Status200OK); }
+            return StatusCode(StatusCodes.Status409Conflict);
         }
     }
 }

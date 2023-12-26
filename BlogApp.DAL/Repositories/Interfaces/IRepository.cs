@@ -1,4 +1,5 @@
-﻿using BlogApp.Core.Entities.Common;
+﻿using BlogApp.Core.Entities;
+using BlogApp.Core.Entities.Common;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,12 @@ namespace BlogApp.DAL.Repositories.Interfaces
             params string[] includes);
         DbSet<TEntity> Table { get; }
 
+        Task Create(Brand brand);
+        void Update(Brand brand);
+        void Delete(Brand brand);
+
         Task Create(TEntity entity);
         Task<int> SaveChangesAsync();
+        Task<Brand> GetByIdAsync(int id);
     }
 }

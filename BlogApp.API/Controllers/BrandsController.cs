@@ -29,5 +29,23 @@ namespace BlogApp.API.Controllers
             if (result) { return StatusCode(StatusCodes.Status200OK); }
             return StatusCode(StatusCodes.Status409Conflict);
         }
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<IActionResult> GetByIdAsync(int id)
+        {
+            if(id<=0)
+            {
+                return StatusCode(StatusCodes.Status400BadRequest);
+            }
+
+            return StatusCode(StatusCodes.Status200OK);
+
+        }
+
+        //[HttpPut]
+        //public async Task<IActionResult> UpdateAsync(int id, string name)
+        //{
+        //    var brand=await _re
+        //}
     }
 }

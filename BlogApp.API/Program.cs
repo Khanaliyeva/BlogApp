@@ -1,10 +1,12 @@
 using BlogApp.Business.DTOs.BrandDtos;
 using BlogApp.Business.Services.Implimentations;
 using BlogApp.Business.Services.Interfaces;
+using BlogApp.Core.Entities;
 using BlogApp.DAL.Context;
 using BlogApp.DAL.Repositories.Implimentations;
 using BlogApp.DAL.Repositories.Interfaces;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,6 +25,15 @@ builder.Services.AddDbContext<AppDbContext>(option =>
 {
     option.UseSqlServer(builder.Configuration.GetConnectionString("Default"));
 });
+
+builder.Services.AddIdentity<Account, IdentityRole>(opt =>
+{
+    opt.Password.RequiredLength = 8;
+    opt.Password.RequireNonAlphanumeric = true;
+    opt.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789._";
+    opt.Lockout.MaxFailedAccessAttempts = 3;
+    opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
+}).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
 var app = builder.Build();
 

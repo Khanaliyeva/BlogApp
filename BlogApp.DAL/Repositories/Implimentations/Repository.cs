@@ -1,4 +1,5 @@
-﻿using BlogApp.Core.Entities.Common;
+﻿using BlogApp.Core.Entities;
+using BlogApp.Core.Entities.Common;
 using BlogApp.DAL.Context;
 using BlogApp.DAL.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -56,6 +57,26 @@ namespace BlogApp.DAL.Repositories.Implimentations
         public async Task<int> SaveChangesAsync()
         {
             return await _context.SaveChangesAsync();
+        }
+
+        public async Task<Brand> GetByIdAsync(int id)
+        {
+            return await _context.Brands.FirstOrDefaultAsync(c => c.Id == id);
+        }
+
+        public async Task Create(Brand brand)
+        {
+            await _context.Brands.AddAsync(brand);
+        }
+
+        public void Update(Brand brand)
+        {
+            _context.Brands.Update(brand);
+        }
+
+        public void Delete(Brand brand)
+        {
+            _context?.Brands.Remove(brand); 
         }
     }
 }

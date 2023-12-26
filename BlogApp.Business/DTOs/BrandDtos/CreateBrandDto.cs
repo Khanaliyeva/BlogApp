@@ -18,8 +18,6 @@ namespace BlogApp.Business.DTOs.BrandDtos
         public BrandCreateDtoValidation()
         {
             RuleFor(x => x.Name).NotEmpty().NotNull().WithMessage("Bos olmaz").MaximumLength(55).WithMessage("55den cox simvol olmaz");
-
-
         }
     }
 }

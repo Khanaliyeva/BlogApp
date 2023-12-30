@@ -19,7 +19,6 @@ namespace BlogApp.API.Controllers
             _accountService = accountService;
         }
 
-        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> Register([FromForm] AppUserDto registerDto)
         {

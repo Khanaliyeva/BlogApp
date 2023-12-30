@@ -1,3 +1,4 @@
+using BlogApp.Business;
 using BlogApp.Business.DTOs.BrandDtos;
 using BlogApp.Business.Services.Implimentations;
 using BlogApp.Business.Services.Interfaces;
@@ -13,19 +14,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddScoped<IBrandRepository, BrandRepository>();
-builder.Services.AddScoped<IBrandService, BrandService>();
 builder.Services.AddControllers().AddFluentValidation(opt =>
 {
     opt.RegisterValidatorsFromAssembly(typeof(BrandCreateDtoValidation).Assembly);
 });
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<AppDbContext>(option =>
-{
-    option.UseSqlServer(builder.Configuration.GetConnectionString("Default"));
-});
-
 builder.Services.AddIdentity<Account, IdentityRole>(opt =>
 {
     opt.Password.RequiredLength = 8;
@@ -34,6 +26,18 @@ builder.Services.AddIdentity<Account, IdentityRole>(opt =>
     opt.Lockout.MaxFailedAccessAttempts = 3;
     opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
 }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
+
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+//builder.Services.AddScoped<IUserService, UserService>();
+//builder.Services.AddScoped<IBrandService, BrandService>();
+builder.Services.AddServices();
+builder.Services.AddDbContext<AppDbContext>(option =>
+{
+    option.UseSqlServer(builder.Configuration.GetConnectionString("Default"));
+});
+
 
 var app = builder.Build();
 

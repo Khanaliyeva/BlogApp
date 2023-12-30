@@ -1,5 +1,6 @@
 using BlogApp.Business;
 using BlogApp.Business.DTOs.BrandDtos;
+using BlogApp.Business.Profiles;
 using BlogApp.Business.Services.Implimentations;
 using BlogApp.Business.Services.Interfaces;
 using BlogApp.Core.Entities;
@@ -33,6 +34,7 @@ builder.Services.AddSwaggerGen();
 //builder.Services.AddScoped<IUserService, UserService>();
 //builder.Services.AddScoped<IBrandService, BrandService>();
 builder.Services.AddServices();
+builder.Services.AddAutoMapper(typeof(UserMapProfiles).Assembly);
 builder.Services.AddDbContext<AppDbContext>(option =>
 {
     option.UseSqlServer(builder.Configuration.GetConnectionString("Default"));

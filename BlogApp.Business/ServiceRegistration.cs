@@ -1,4 +1,6 @@
-﻿using BlogApp.Business.Services.Implimentations;
+﻿using BlogApp.Business.ExternalServices.Implimentations;
+using BlogApp.Business.ExternalServices.Interfaces;
+using BlogApp.Business.Services.Implimentations;
 using BlogApp.Business.Services.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -15,6 +17,7 @@ namespace BlogApp.Business
         {
             services.AddScoped<IBrandService, BrandService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ITokenService, TokenService>();
 
         }
     }

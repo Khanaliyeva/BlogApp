@@ -26,6 +26,13 @@ namespace BlogApp.API.Controllers
             return StatusCode(StatusCodes.Status200OK);
         }
 
+
+        [HttpPost("action")]
+        public async Task<IActionResult> Login(LoginDto loginDto)
+        {
+            var result=await _accountService.LoginAsync(loginDto);
+            return Ok(result);
+        }
     }
 
 }

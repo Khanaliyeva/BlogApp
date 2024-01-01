@@ -11,7 +11,7 @@ namespace BlogApp.Business.Services.Interfaces
     public interface IUserService
     {
         Task Register(AppUserDto userDto);
-        //Task<string> LoginAsync(LoginDto loginDto);
+        Task<TokenResponseDto> LoginAsync(LoginDto loginDto);
 
     }
 }
